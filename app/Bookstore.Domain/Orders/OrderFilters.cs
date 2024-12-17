@@ -1,4 +1,6 @@
-﻿namespace Bookstore.Domain.Orders
+﻿using System;
+
+namespace Bookstore.Domain.Orders
 {
     public class OrderFilters
     {

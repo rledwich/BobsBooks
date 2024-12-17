@@ -1,4 +1,4 @@
-﻿namespace Bookstore.Domain.Offers
+﻿namespace Bookstore.Domain.Orders
 {
     public class OfferStatistics
     {

@@ -5,6 +5,8 @@ namespace Bookstore.Domain.Offers
 {
     public class Offer : Entity
     {
+        protected Offer() { }
+
         public Offer(
             int customerId,
             string bookName,
@@ -33,7 +35,7 @@ namespace Bookstore.Domain.Offers
 
         public string BookName { get; set; }
 
-        public string? FrontUrl { get; set; }
+        public string FrontUrl { get; set; }
 
         public ReferenceDataItem Genre { get; set; }
         public int GenreId { get; set; }
@@ -47,11 +49,11 @@ namespace Bookstore.Domain.Offers
         public ReferenceDataItem BookType { get; set; }
         public int BookTypeId { get; set; }
 
-        public string? Summary { get; set; }
+        public string Summary { get; set; }
 
         public OfferStatus OfferStatus { get; set; } = OfferStatus.PendingApproval;
 
-        public string? Comment { get; set; }
+        public string Comment { get; set; }
 
         public Customer Customer { get; set; }
         public int CustomerId { get; set; }

@@ -55,6 +55,6 @@
 
 <div class="row justify-content-center">
     <div class="col-8">
-        <a class="btn btn-primary" asp-action="Index">Back</a>
+        @Html.ActionLink("Back", "Index", new { controller = "Inventory"}, new { @class = "btn btn-primary" })
     </div>
 </div>

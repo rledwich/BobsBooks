@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿
+using System.Web.Mvc;
 
 namespace Bookstore.Web.Areas.Admin.Controllers
 {
@@ -8,22 +7,22 @@ namespace Bookstore.Web.Areas.Admin.Controllers
     public class ErrorController : AdminAreaControllerBase
     {
         [Route("/Error/Index/{code:int}")]
-        public IActionResult Index(int code)
+        public ActionResult Index(int code)
         {
-            var exception = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            ViewData["Path"] = exception?.Path;
-            ViewData["StatusCode"] = code;
+            //var exception = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            //ViewData["Path"] = exception?.Path;
+            //ViewData["StatusCode"] = code;
             return View();
         }
 
         [Route("/error")]
-        public IActionResult Support()
+        public ActionResult Support()
         {
-            var exception = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            ViewData["Path"] = exception?.Path;
-            var error = Problem();
+            //var exception = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            //ViewData["Path"] = exception?.Path;
+            //var error = Problem();
 
-            ViewData["StatusCode"] = error.StatusCode;
+            //ViewData["StatusCode"] = error.StatusCode;
             return View("~/Views/Error/Index.cshtml");
         }
     }

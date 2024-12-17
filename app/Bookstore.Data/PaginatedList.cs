@@ -1,15 +1,12 @@
-﻿namespace Bookstore.Data
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Bookstore.Domain
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using Bookstore.Domain;
-
-    using Microsoft.EntityFrameworkCore;
-
-    public class PaginatedList<T> : List<T>, IPaginatedList<T>
+    public class PaginatedList<T> : List<T>, IPaginatedList<T> where T : Entity
     {
         private readonly IQueryable<T> source;
         private readonly int pageIndex;
@@ -30,19 +27,19 @@
 
         public async Task PopulateAsync()
         {
-            var count = await this.source.CountAsync();
-            var items = await this.source.Skip((this.pageIndex - 1) * this.pageSize).Take(this.pageSize).ToListAsync();
+            var count = await source.CountAsync();
+            var items = await source.OrderBy(x => x.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
 
-            this.PageIndex = this.pageIndex;
+            PageIndex = pageIndex;
 
-            this.TotalPages = (int)Math.Ceiling(count / (double)this.pageSize);
+            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
 
-            this.AddRange(items);
+            AddRange(items);
         }
 
-        public bool HasPreviousPage => this.PageIndex > 1;
+        public bool HasPreviousPage => PageIndex > 1;
 
-        public bool HasNextPage => this.PageIndex < this.TotalPages;
+        public bool HasNextPage => PageIndex < TotalPages;
 
         //TODO Consider pulling this out into its own class, e.g. PaginationButtonGenerator
         public IEnumerable<int> GetPageList(int count)
@@ -51,12 +48,12 @@
 
             var pagesCount = 1;
             var newPagesCount = 1;
-            var start = this.PageIndex;
-            var end = this.PageIndex;
+            var start = PageIndex;
+            var end = PageIndex;
 
             while (pagesCount < count)
             {
-                if (end + 1 <= this.TotalPages)
+                if (end + 1 <= TotalPages)
                 {
                     end++;
                     newPagesCount++;
@@ -79,22 +76,6 @@
             }
 
             return Enumerable.Range(start, pagesCount);
-        }
-
-        public IPaginatedList<TConvertTo> ConvertTo<TConvertTo>(Func<T, TConvertTo> convert)
-        {
-            var result = new PaginatedList<TConvertTo>
-            {
-                PageIndex = this.PageIndex,
-                TotalPages = this.TotalPages,
-            };
-
-            foreach (var item in this)
-            {
-                result.Add(convert(item));
-            }
-
-            return result;
         }
     }
 }

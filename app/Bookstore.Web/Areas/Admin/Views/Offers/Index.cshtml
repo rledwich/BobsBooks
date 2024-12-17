@@ -5,7 +5,7 @@
 
 @{ ViewData["Title"] = "Offers"; }
 
-@await Html.PartialAsync("_MessageBanner")
+@Html.Partial("_MessageBanner")
 
 <div class="d-flex m-3">
     <h5 class="me-auto">Offers</h5>
@@ -16,33 +16,27 @@
         <form class="row row-cols-lg-auto g-3 align-items-center" method="get">
             <div class="col-12">
                 <label class="visually-hidden" for="NameFilterInput">Book name</label>
-                <input id="NameFilterInput" type="text" class="form-control" asp-for="Filters.BookName" placeholder="Book name" />
+                @Html.TextBoxFor(m => m.Filters.BookName, new { placeholder = "Book Name", @class = "form-control", @id = "NameFilterInput" })
             </div>
 
             <div class="col-12">
                 <label class="visually-hidden" for="AuthorFilterInput">Author</label>
-                <input id="AuthorFilterInput" type="text" class="form-control" asp-for="Filters.Author" placeholder="Author" />
+                @Html.TextBoxFor(m => m.Filters.Author, new { placeholder = "Author", @class = "form-control", @id = "AuthorFilterInput" })
             </div>
 
             <div class="col-12">
                 <label class="visually-hidden" for="GenreFilter">Genre</label>
-                <select id="GenreFilter" class="form-select" asp-for="Filters.GenreId" asp-items="Model.Genres">
-                    <option value="">All Genres</option>
-                </select>
+                @Html.DropDownListFor(a => a.Filters.GenreId, Model.Genres, "All Genres", new { @class = "form-select" })
             </div>
 
             <div class="col-12">
                 <label class="visually-hidden" for="ConditionFilter">Condition</label>
-                <select id="ConditionFilter" class="form-select" asp-for="Filters.ConditionId" asp-items="Model.BookConditions">
-                    <option value="">All Book Conditions</option>
-                </select>
+                @Html.DropDownListFor(a => a.Filters.ConditionId, Model.BookConditions, "All Book Conditions", new { @class = "form-select" })
             </div>
 
             <div class="col-12">
                 <label class="visually-hidden" for="OfferStatusSelect">Offer status</label>
-                <select id="OfferStatusSelect" class="form-select" asp-for="Filters.OfferStatus" asp-items="Html.GetEnumSelectList<OfferStatus>()">
-                    <option value="">All Offer Statuses</option>
-                </select>
+                @Html.EnumDropDownListFor(a => a.Filters.OfferStatus, "All Offer Statuses", new { @class = "form-select" })
             </div>
 
             <div class="col-12">
@@ -50,7 +44,7 @@
             </div>
 
             <div class="col-12">
-                <a class="btn btn-secondary" asp-action="Index">Clear</a>
+                @Html.ActionLink("Clear", "Index", new { controller = "Offers" }, new { @class = "btn btn-secondary" })
             </div>
         </form>
     </div>
@@ -59,7 +53,7 @@
 <div class="card m-3">
     <div class="card-header">
         <div class="d-flex justify-content-end">
-            @await Html.PartialAsync("_Paginator", Model)
+            @Html.Partial("_Paginator", Model)
         </div>
     </div>
 
@@ -95,20 +89,28 @@
                             {
                                 case OfferStatus.PendingApproval:
                                     <div class="hstack gap-2">
-                                        <button type="submit" class="btn btn-link p-0" asp-controller="Offers" asp-action="Approve" asp-route-id="@offer.OfferId">Approve</button>
+
+
+
+                                        <button type="submit" class="btn btn-link p-0" formaction="@($"/Admin/Offers/ApproveAsync/{offer.OfferId}")">Approve</button>
+
                                         <div class="vr"></div>
-                                        <button type="submit" class="btn btn-link p-0" asp-controller="Offers" asp-action="Reject" asp-route-id="@offer.OfferId">Reject</button>
+
+                                        <button type="submit" class="btn btn-link p-0" formaction="@($"/Admin/Offers/RejectAsync/{offer.OfferId}")">Reject</button>
+
                                     </div>
 
                                     break;
 
                                 case OfferStatus.Approved:
-                                    <button type="submit" class="btn btn-link p-0" asp-controller="Offers" asp-action="Received" asp-route-id="@offer.OfferId">Confirm Shipment</button>
+
+                                    <button type="submit" class="btn btn-link p-0" formaction="@($"/Admin/Offers/ReceivedAsync/{offer.OfferId}")">Confirm Shipment</button>
 
                                     break;
 
                                 case OfferStatus.Received:
-                                    <button class="btn btn-link p-0" asp-controller="Offers" asp-action="Paid" asp-route-id="@offer.OfferId">Make Payment</button>
+
+                                    <button type="submit" class="btn btn-link p-0" formaction="@($"/Admin/Offers/PaidAsync/{offer.OfferId}")">Make Payment</button>                                    
 
                                     break;
                             }
@@ -121,7 +123,7 @@
 
     <div class="card-footer">
         <div class="d-flex justify-content-end">
-            @await Html.PartialAsync("_Paginator", Model)
+            @Html.Partial("_Paginator", Model)
         </div>
     </div>
 </div>

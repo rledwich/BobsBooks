@@ -1,10 +1,13 @@
 ﻿using Bookstore.Domain.ReferenceData;
+using System;
 
 namespace Bookstore.Domain.Books
 {
     public class Book : Entity
     {
         public const int LowBookThreshold = 5;
+
+        protected Book() { }
 
         public Book(
             string name, 
@@ -17,8 +20,8 @@ namespace Bookstore.Domain.Books
             decimal price,
             int quantity, 
             int? year = null,
-            string? summary = null,
-            string? coverImageUrl = null)
+            string summary = null,
+            string coverImageUrl = null)
         {
             Name = name;
             Author = author;
@@ -54,9 +57,9 @@ namespace Bookstore.Domain.Books
         public ReferenceDataItem Condition { get; set; }
         public int ConditionId { get; set; }
 
-        public string? CoverImageUrl { get; set; }
+        public string CoverImageUrl { get; set; }
 
-        public string? Summary { get; set; }
+        public string Summary { get; set; }
 
         public decimal Price { get; set; }
 
@@ -64,7 +67,7 @@ namespace Bookstore.Domain.Books
 
         public bool IsInStock => Quantity > 0;
 
-        public bool IsLowInStock => Quantity <= LowBookThreshold;
+        public bool IsLowInStock => Quantity > LowBookThreshold;
 
         public void ReduceStockLevel(int quantity)
         {

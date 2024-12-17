@@ -2,20 +2,18 @@
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 using Bookstore.Domain;
-using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Threading.Tasks;
+using BobsBookstoreClassic.Data;
 
 namespace Bookstore.Data.FileServices
 {
     public class S3FileService : IFileService
     {
-        private readonly IConfiguration configuration;
         private readonly TransferUtility transferUtility;
 
-        public S3FileService(IConfiguration configuration, IAmazonS3 s3Client)
+        public S3FileService(IAmazonS3 s3Client)
         {
-            this.configuration = configuration;
             transferUtility = new TransferUtility(s3Client);
         }
 
@@ -23,7 +21,7 @@ namespace Bookstore.Data.FileServices
         {
             if (string.IsNullOrWhiteSpace(filePath)) return;
 
-            var bucketName = configuration["AWS:BucketName"];
+            var bucketName = BookstoreConfiguration.Get("Files/BucketName");
             var request = new DeleteObjectRequest
             {
                 BucketName = bucketName,
@@ -37,9 +35,9 @@ namespace Bookstore.Data.FileServices
         {
             if (contents == null) return null;
 
-            var bucketName = configuration["AWS:BucketName"];
+            var bucketName = BookstoreConfiguration.Get("Files/BucketName");
             var uniqueFilename = $"{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}{Path.GetExtension(filename)}";
-            var cloudFrontDomain = configuration["AWS:CloudFrontDomain"];
+            var cloudFrontDomain = BookstoreConfiguration.Get("Files/CloudFrontDomain");
 
             var request = new TransferUtilityUploadRequest
             {

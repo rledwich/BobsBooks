@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Bookstore.Web.Helpers;
 using Bookstore.Domain.Customers;
 using Bookstore.Domain.Carts;
 using Bookstore.Web.ViewModel.ShoppingCart;
+using System.Web.Mvc;
 
 namespace Bookstore.Web.Controllers
 {
@@ -20,7 +19,7 @@ namespace Bookstore.Web.Controllers
             this.shoppingCartService = shoppingCartService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<ActionResult> Index()
         {
             var shoppingCart = await shoppingCartService.GetShoppingCartAsync(HttpContext.GetShoppingCartCorrelationId());
 
@@ -28,7 +27,7 @@ namespace Bookstore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int shoppingCartItemId)
+        public async Task<ActionResult> Delete(int shoppingCartItemId)
         {
             var dto = new DeleteShoppingCartItemDto(HttpContext.GetShoppingCartCorrelationId(), shoppingCartItemId);
 
@@ -39,7 +38,7 @@ namespace Bookstore.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Error()
+        public ActionResult Error()
         {
             return View();
         }

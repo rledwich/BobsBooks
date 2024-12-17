@@ -1,9 +1,12 @@
-﻿namespace Bookstore.Domain
+﻿using System.IO;
+using System.Threading.Tasks;
+
+namespace Bookstore.Domain
 {
     public interface IFileService
     {
-        public Task<string> SaveAsync(Stream? contents, string? filename);
+        Task<string> SaveAsync(Stream contents, string filename);
 
-        public Task DeleteAsync(string? filePath);
+        Task DeleteAsync(string filePath);
     }
 }

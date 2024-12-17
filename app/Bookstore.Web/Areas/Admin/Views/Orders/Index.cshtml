@@ -1,4 +1,5 @@
 ﻿@using Bookstore.Domain.Orders;
+@using Bookstore.Web.Helpers;
 
 @model Bookstore.Web.Areas.Admin.Models.Orders.OrderIndexViewModel
 
@@ -13,19 +14,17 @@
         <form class="row row-cols-lg-auto g-3 align-items-center" method="get">
             <div class="col-12">
                 <label class="visually-hidden" for="OrderStatusSelect">Reference data type</label>
-                <select id="OrderStatusSelect" class="form-select" name="Filters.OrderStatusfilter" asp-for="Filters.OrderStatusFilter" asp-items="Html.GetEnumSelectList<OrderStatus>()">
-                    <option value="">All Order Statuses</option>
-                </select>
+                @Html.EnumDropDownListFor(a => a.Filters.OrderStatusFilter, "All Order Statuses", new { @class = "form-select" })
             </div>
 
             <div class="col-12">
                 <label class="visually-hidden" for="OrderStatusSelect">Order date from</label>
-                <input id="OrderDateFrom" type="date" class="form-control" name="Filters.OrderDateFromfilter" asp-for="Filters.OrderDateFromFilter" />
+                @Html.TextBoxFor(a => a.Filters.OrderDateFromFilter, new { @class="form-control", @type="date" })                
             </div>
 
             <div class="col-12">
                 <label class="visually-hidden" for="OrderStatusSelect">Order date to</label>
-                <input id="OrderDateTo" type="date" class="form-control" name="Filters.OrderDateTofilter" asp-for="Filters.OrderDateToFilter" />
+                @Html.TextBoxFor(a => a.Filters.OrderDateToFilter, new { @class = "form-control", @type = "date" })
             </div>
 
             <div class="col-12">
@@ -33,7 +32,7 @@
             </div>
 
             <div class="col-12">
-                <a class="btn btn-secondary" asp-action="Index">Clear</a>
+                @Html.ActionLink("Clear", "Index", new { controller = "Orders" }, new { @class = "btn btn-secondary" })
             </div>
         </form>
     </div>
@@ -42,7 +41,7 @@
 <div class="card m-3">
     <div class="card-header">
         <div class="d-flex justify-content-end">
-            @await Html.PartialAsync("_Paginator")
+            @Html.Partial("_Paginator")
         </div>
     </div>
 
@@ -68,7 +67,7 @@
                         <td>@order.DeliveryDate.ToShortDateString()</td>
                         <td>@order.Total.ToString("C")</td>
                         <td>
-                            <a class="card-link" asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id">View</a>
+                            @Html.ActionLink("View", "Details", new { controller = "Orders", @id = order.Id }, new { @class = "card-link"})
                         </td>
                     </tr>
                 }
@@ -78,7 +77,7 @@
 
     <div class="card-footer">
         <div class="d-flex justify-content-end">
-            @await Html.PartialAsync("_Paginator")
+            @Html.Partial("_Paginator")
         </div>
     </div>
 </div>

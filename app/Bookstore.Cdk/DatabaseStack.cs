@@ -1,11 +1,12 @@
-namespace Bookstore.Cdk;
-
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using Amazon.CDK.AWS.RDS;
 using Amazon.CDK.AWS.SSM;
-
+using Bookstore.Common;
 using Constructs;
+using InstanceType = Amazon.CDK.AWS.EC2.InstanceType;
+
+namespace Bookstore.Cdk;
 
 public class DatabaseStackProps : StackProps
 {
@@ -20,13 +21,25 @@ public class DatabaseStack : Stack
 
     internal DatabaseStack(Construct scope, string id, DatabaseStackProps props) : base(scope, id, props)
     {
-        var dbSG = new SecurityGroup(this, "DatabaseSecurityGroup", new SecurityGroupProps
+        var securityGroup = CreateSecurityGroup(props);
+
+        CreateDatabase(props, securityGroup);
+
+        CreateConnectionString();
+    }
+
+    private SecurityGroup CreateSecurityGroup(DatabaseStackProps props)
+    {
+        return new SecurityGroup(this, "DatabaseSecurityGroup", new SecurityGroupProps
         {
             Vpc = props.Vpc,
             Description = "Allow access to the SQL Server instance from the website",
         });
+    }
 
-        this.Database = new DatabaseInstance(this, $"{Constants.AppName}SqlDb", new DatabaseInstanceProps
+    private void CreateDatabase(DatabaseStackProps props, SecurityGroup securityGroup)
+    {
+        Database = new DatabaseInstance(this, "Database", new DatabaseInstanceProps
         {
             Vpc = props.Vpc,
             VpcSubnets = new SubnetSelection
@@ -37,30 +50,35 @@ public class DatabaseStack : Stack
             // fits inside the free tier for new accounts
             Engine = DatabaseInstanceEngine.SqlServerEx(new SqlServerExInstanceEngineProps
             {
-                Version = SqlServerEngineVersion.VER_14
+                Version = SqlServerEngineVersion.VER_15
             }),
-            StorageType = StorageType.GP3,
-            AllocatedStorage = 20,            
             Port = DatabasePort,
-            SecurityGroups = new ISecurityGroup[]
+            SecurityGroups = new[]
             {
-                dbSG
+                securityGroup
             },
-            InstanceType = Amazon.CDK.AWS.EC2.InstanceType.Of(InstanceClass.BURSTABLE2, InstanceSize.MICRO),
+            InstanceType = InstanceType.Of(InstanceClass.BURSTABLE3, InstanceSize.SMALL),
+
             InstanceIdentifier = $"{Constants.AppName}Database",
+
             // As this is a sample app, turn off automated backups to avoid any storage costs
             // of automated backup snapshots. It also helps the stack launch a little faster by
             // avoiding an initial backup.
             BackupRetention = Duration.Seconds(0)
         });
+    }
 
-        // The secret, in Secrets Manager, holds the auto-generated database credentials. Because
-        // the secret name will have a random string suffix, we add a deterministic parameter in
-        // Systems Manager to contain the actual secret name.
-        _ = new StringParameter(this, $"{Constants.AppName}DbSecret", new StringParameterProps
+    private void CreateConnectionString()
+    {
+        var password = Database.Secret.SecretValueFromJson("password");
+        var server = Database.Secret.SecretValueFromJson("host");
+        var userId = Database.Secret.SecretValueFromJson("username");
+        var database = Database.Secret.SecretValueFromJson("dbInstanceIdentifier");
+
+        _ = new StringParameter(this, "DatabaseConnectionStringSSMParameter", new StringParameterProps
         {
-            ParameterName = $"/{Constants.AppName}/dbsecretsname",
-            StringValue = this.Database.Secret.SecretName
+            ParameterName = $"/{Constants.AppName}/Database/ConnectionStrings/BookstoreDatabaseConnection",
+            StringValue = $"Server={server};Database={database};User Id={userId};Password={password};"
         });
     }
 }

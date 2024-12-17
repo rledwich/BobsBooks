@@ -2,11 +2,11 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 using Bookstore.Domain.Books;
 using Bookstore.Domain.ReferenceData;
 using Bookstore.Web.Helpers;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Bookstore.Web.Areas.Admin.Models.Inventory
 {
@@ -79,10 +79,10 @@ namespace Bookstore.Web.Areas.Admin.Models.Inventory
         [Required]
         public int Quantity { get; set; } = 1;
 
-        [MaxFileSize(2 * 1024 * 1024)]
-        [ImageTypes(new[] { ".png", ".jpg", ".jpeg" })]
+        [MaxFileSize(2*1024*1024)]
+        [ImageTypes(new string[] {".png", ".jpg", ".jpeg"})]
         [DisplayName("Cover image")]
-        public IFormFile CoverImage { get; set; }
+        public HttpPostedFileBase CoverImage { get; set; }
         
         public string CoverImageUrl { get; set; }
 
@@ -90,22 +90,21 @@ namespace Bookstore.Web.Areas.Admin.Models.Inventory
 
         public void AddReferenceData(IEnumerable<ReferenceDataItem> referenceDataItems)
         {
-            var dataItems = referenceDataItems.ToList();
-            BookConditions = dataItems
+            BookConditions = referenceDataItems
                 .Where(x => x.DataType == ReferenceDataType.Condition)
-                .Select(x => new SelectListItem(x.Text, x.Id.ToString()));
+                .Select(x => new SelectListItem { Text = x.Text, Value = x.Id.ToString() });
 
-            BookTypes = dataItems
+            BookTypes = referenceDataItems
                 .Where(x => x.DataType == ReferenceDataType.BookType)
-                .Select(x => new SelectListItem(x.Text, x.Id.ToString()));
+                .Select(x => new SelectListItem{ Text = x.Text, Value = x.Id.ToString() });
 
-            Genres = dataItems
+            Genres = referenceDataItems
                 .Where(x => x.DataType == ReferenceDataType.Genre)
-                .Select(x => new SelectListItem(x.Text, x.Id.ToString()));
+                .Select(x => new SelectListItem{ Text = x.Text, Value = x.Id.ToString() });
 
-            Publishers = dataItems
+            Publishers = referenceDataItems
                 .Where(x => x.DataType == ReferenceDataType.Publisher)
-                .Select(x => new SelectListItem(x.Text, x.Id.ToString()));
+                .Select(x => new SelectListItem{ Text = x.Text, Value = x.Id.ToString() });
         }
     }
 }

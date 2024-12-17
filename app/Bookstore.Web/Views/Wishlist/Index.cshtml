@@ -4,7 +4,7 @@
     ViewData["Title"] = "Wishlist";
 }
 
-<partial name="_Notification" />
+@Html.Partial("_Notification")
 
 <div class="panel-body">
 
@@ -12,23 +12,22 @@
 
     <br />
 
-    <form method="post">
-        <table class="table">
-            <thead>
+    <table class="table">
+        <thead>
             <tr>
                 <th>Cover</th>
                 <th>Book name</th>
                 <th>Price</th>
                 <th></th>
             </tr>
-            </thead>
+        </thead>
 
-            <tbody>
+        <tbody>
             @foreach (var item in Model.WishlistItems)
             {
                 <tr>
                     <td>
-                        <img src="@Html.DisplayFor(modelitem => item.ImageUrl)" style="width: 135px;height: 200px;" onerror="this.onerror=null;this.src='/images/default_c.jpg';" />
+                        <img src="@item.ImageUrl" style="width: 135px;height: 200px;" onerror="this.onerror=null;this.src='/images/default_c.jpg';" />
                     </td>
                     <td>
                         @item.BookName
@@ -38,18 +37,23 @@
                     </td>
                     <td>
                         <div class="hstack gap-2">
-                            <button type="submit" class="btn btn-link" asp-action="MoveToShoppingCart" asp-route-shoppingCartItemId="@item.ShoppingCartItemId">Move to shopping cart</button>
+                            @using (Html.BeginForm("MoveToShoppingCart", "Wishlist", new { shoppingCartItemId = item.ShoppingCartItemId }))
+                            {
+                                <button type="submit" class="btn btn-link">Move to shopping cart</button>
+                            }
                             <div class="vr"></div>
                             <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-shoppingCartItemId="@item.ShoppingCartItemId">Remove</button>
                         </div>
                     </td>
                 </tr>
             }
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 
-        <button type="submit" class="btn" asp-action="MoveAllItemsToShoppingCart">Move all items to shopping cart</button>
-    </form>
+    @using (Html.BeginForm("MoveAllItemsToShoppingCart", "Wishlist"))
+    {
+        <button type="submit" class="btn">Move all items to shopping cart</button>
+    }
 
     <div id="confirmDeleteModal" class="modal" tabindex="-1">
         <div class="modal-dialog">
@@ -62,10 +66,11 @@
                     <p>Are you sure you want to remove this item from your wishlist?</p>
                 </div>
                 <div class="modal-footer">
-                    <form method="post">
-                        <button id="confirmDeleteButton" type="submit" class="btn btn-primary" asp-action="Delete">Yes, Remove</button>
+                    @using (Html.BeginForm())
+                    {
+                        <button id="confirmDeleteButton" type="submit" class="btn btn-primary" formaction="@Url.Action("Delete")">Yes, Remove</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Don't Remove</button>
-                    </form>
+                    }
                 </div>
             </div>
         </div>
@@ -76,9 +81,9 @@
     <script type="text/javascript">
         $(function () {
 
-            $('#confirmDeleteModal').on('show.bs.modal', function (event) {               
+            $('#confirmDeleteModal').on('show.bs.modal', function (event) {
                 var modal = $(this);
-                var formAction = modal.find('#confirmDeleteButton').attr("formaction");
+                var formAction = modal.find('#confirmDeleteButton')[0].formAction;
                 var shoppingCartItemId = $(event.relatedTarget).data('shoppingcartitemid');
 
                 modal.find('#confirmDeleteButton').attr("formaction", formAction + "?shoppingCartItemId=" + shoppingCartItemId);

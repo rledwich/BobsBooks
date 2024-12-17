@@ -3,7 +3,7 @@ using Bookstore.Domain.Carts;
 using Bookstore.Domain.Orders;
 using Bookstore.Web.Helpers;
 using Bookstore.Web.ViewModel.Checkout;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Mvc;
 using System.Threading.Tasks;
 
 namespace Bookstore.Web.Controllers
@@ -23,7 +23,7 @@ namespace Bookstore.Web.Controllers
             this.addressService = addressService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<ActionResult> Index()
         {
             var shoppingCart = await shoppingCartService.GetShoppingCartAsync(HttpContext.GetShoppingCartCorrelationId());
             var addresses = await addressService.GetAddressesAsync(User.GetSub());
@@ -32,8 +32,10 @@ namespace Bookstore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(CheckoutIndexViewModel model)
+        public async Task<ActionResult> Index(CheckoutIndexViewModel model)
         {
+            if(!ModelState.IsValid) return  View(model);
+
             var dto = new CreateOrderDto(User.GetSub(), HttpContext.GetShoppingCartCorrelationId(), model.SelectedAddressId);
 
             var orderId = await orderService.CreateOrderAsync(dto);
@@ -41,7 +43,7 @@ namespace Bookstore.Web.Controllers
             return RedirectToAction("Finished", new { orderId });
         }
 
-        public async Task<IActionResult> Finished(int orderId)
+        public async Task<ActionResult> Finished(int orderId)
         {
             var order = await orderService.GetOrderAsync(orderId);
 

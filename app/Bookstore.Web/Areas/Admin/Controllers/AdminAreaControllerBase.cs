@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿
+using System.Web.Mvc;
 
 namespace Bookstore.Web.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [RouteArea("Admin")]
     [Authorize(Roles = "Administrators")]
     public abstract class AdminAreaControllerBase : Controller { }
 }

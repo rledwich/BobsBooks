@@ -1,4 +1,7 @@
-﻿namespace Bookstore.Domain.Customers
+﻿using System;
+using System.Threading.Tasks;
+
+namespace Bookstore.Domain.Customers
 {
     public interface ICustomerService
     {

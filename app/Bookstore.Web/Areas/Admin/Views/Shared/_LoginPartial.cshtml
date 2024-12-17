@@ -3,7 +3,7 @@
 </span>
 
 <div class="hstack gap-2">
-    <a class="nav-link" asp-area="" asp-action="Index" asp-controller="Home">Customer Portal</a>
+    @Html.ActionLink("Customer Portal", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
     <div class="vr"></div>
-    <a class="nav-link" asp-area="" asp-action="LogOut" asp-controller="Authentication">Logout</a>
+    @Html.ActionLink("Logout", "LogOut", "Authentication", new { area = "" }, new { @class = "nav-link" })
 </div>

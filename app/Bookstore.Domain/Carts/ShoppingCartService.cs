@@ -1,4 +1,6 @@
-﻿namespace Bookstore.Domain.Carts
+﻿using System.Threading.Tasks;
+
+namespace Bookstore.Domain.Carts
 {
     public interface IShoppingCartService
     {

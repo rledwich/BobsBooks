@@ -1,4 +1,7 @@
-﻿namespace Bookstore.Domain.ReferenceData
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Bookstore.Domain.ReferenceData
 {
     public interface IReferenceDataService
     {

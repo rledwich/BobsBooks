@@ -1,10 +1,11 @@
 ﻿@model Bookstore.Web.ViewModel.Checkout.CheckoutIndexViewModel
 
 <div class="panel-body">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <h1>Finish your order</h1>
-    <br />
-    <br />
+    <br/>
+    <br/>
     <div class="container" style="text-align: center">
 
         <ul class="time-horizontal">
@@ -16,9 +17,9 @@
 
         </ul>
     </div>
-    <br />
-    <br />
-    <br />
+    <br/>
+    <br/>
+    <br/>
 
     <div>
         <h2>Total price :$@Model.Total</h2>
@@ -44,7 +45,7 @@
             {
                 <tr>
                     <td>
-                        <input type="radio" asp-for="@Model.SelectedAddressId" value="@address.Id" />
+                        @Html.RadioButtonFor(model => model.SelectedAddressId, address.Id)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => address.AddressLine1)
@@ -65,19 +66,19 @@
                         @Html.DisplayFor(modelItem => address.ZipCode)
                     </td>
                     <td>
-                        <a asp-action="Update" asp-controller="Address" asp-route-id="@address.Id" asp-route-returnUrl="@Url.Action()">Edit</a>
+                        @Html.ActionLink("Edit", "Update", "Address", new { id = address.Id, returnUrl = Url.Action() }, null)
                     </td>
                 </tr>
             }
 
             @if (Model.Addresses.Count() == 0)
             {
-                <input type="submit" value="Finish your order" class="btn" disabled />
+                <input type="submit" value="Finish your order" class="btn" disabled/>
                 <p style="color:red"> Add an Address to proceed to checkout </p>
             }
             else
             {
-                <input type="submit" value="Finish your order" class="btn" />
+                <input type="submit" value="Finish your order" class="btn"/>
             }
             </tbody>
         </table>
@@ -85,7 +86,7 @@
 
     <div>
         <p style="text-align: center">
-            <a asp-action="Create" asp-controller="Address" asp-route-returnUrl="@Url.Action()">Add address</a>
+            @Html.ActionLink("Add address", "Create", "Address", new { returnUrl = Url.Action() }, null)
         </p>
     </div>
 
@@ -102,7 +103,7 @@
         {
             <tr>
                 <td>
-                    <img src="@item.ImageUrl" height="80" width="50" onerror="this.onerror=null;this.src='/images/default_c.jpg';" />
+                    <img src="@item.ImageUrl" height="80" width="50" onerror="this.onerror=null;this.src='/images/default_c.jpg';"/>
                 </td>
                 <td>
                     <span class="@(item.OutOfStock ? "text-danger" : "")">@item.BookName</span>
@@ -114,7 +115,7 @@
                 </td>
 
                 <td>
-                    <span style="@(item.OutOfStock ? "text-decoration: line-through;":"")">$@item.Price</span>
+                    <span style="@(item.OutOfStock ? "text-decoration: line-through;" : "")">$@item.Price</span>
                 </td>
             </tr>
         }

@@ -1,7 +1,9 @@
 ﻿<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Bob's Used Books</a>
+            <a class="navbar-brand">
+                @Html.ActionLink("Bob's Used Books", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -13,28 +15,28 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Orders" asp-action="Index">My Orders</a>
+                            @Html.ActionLink("My Orders", "Index", "Orders", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                     }
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Search" asp-action="Index">Search</a>
+                        @Html.ActionLink("Search", "Index", "Search", new { area = "" }, new { @class = "nav-link text-dark" })
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Resale" asp-action="Index">Resell my Books</a>
+                            @Html.ActionLink("Resell my Books", "Index", "Resale", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                     }
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Wishlist" asp-action="Index">Wish List</a>
+                        @Html.ActionLink("Wish List", "Index", "Wishlist", new { area = "" }, new { @class = "nav-link text-dark" })
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="ShoppingCart" asp-action="Index">Cart</a>
+                        @Html.ActionLink("Cart", "Index", "ShoppingCart", new { area = "" }, new { @class = "nav-link text-dark" })
                     </li>
                 </ul>
             </div>
 
-            <partial name="_LoginPartial" />
+            @Html.Partial("_LoginPartial")
         </div>
     </nav>
 </header>

@@ -1,13 +1,15 @@
-﻿namespace Bookstore.Domain.Customers
+﻿using System.Threading.Tasks;
+
+namespace Bookstore.Domain.Customers
 {
     public interface ICustomerRepository
     {
-        internal protected Task<Customer> GetAsync(int id);
+        Task<Customer> GetAsync(int id);
 
-        internal protected Task<Customer> GetAsync(string sub);
+        Task<Customer> GetAsync(string sub);
 
-        internal protected Task AddAsync(Customer customer);
+        Task AddAsync(Customer customer);
 
-        internal protected Task SaveChangesAsync();
+        Task SaveChangesAsync();
     }
 }

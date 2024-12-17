@@ -1,5 +1,8 @@
 ﻿using Bookstore.Domain.Customers;
 using Bookstore.Domain.Orders;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Bookstore.Domain.Offers
 {
@@ -77,9 +80,7 @@ namespace Bookstore.Domain.Offers
 
         public async Task<OfferStatistics> GetStatisticsAsync()
         {
-            var result = (await offerRepository.GetStatisticsAsync()) ?? new OfferStatistics();
-
-            return result;
+            return (await offerRepository.GetStatisticsAsync()) ?? new OfferStatistics();
         }
     }
 }

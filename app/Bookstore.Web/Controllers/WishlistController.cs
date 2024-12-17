@@ -1,24 +1,25 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Bookstore.Web.Helpers;
 using Bookstore.Domain.Customers;
 using Bookstore.Domain.Carts;
 using Bookstore.Web.ViewModel.Wishlist;
+using System.Web.Mvc;
 
 namespace Bookstore.Web.Controllers
 {
     [AllowAnonymous]
     public class WishlistController : Controller
     {
+        private readonly ICustomerService customerService;
         private readonly IShoppingCartService shoppingCartService;
 
-        public WishlistController(IShoppingCartService shoppingCartService)
+        public WishlistController(ICustomerService customerService, IShoppingCartService shoppingCartService)
         {
+            this.customerService = customerService;
             this.shoppingCartService = shoppingCartService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<ActionResult> Index()
         {
             var shoppingCart = await shoppingCartService.GetShoppingCartAsync(HttpContext.GetShoppingCartCorrelationId());
 
@@ -26,7 +27,7 @@ namespace Bookstore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> MoveToShoppingCart(int shoppingCartItemId)
+        public async Task<ActionResult> MoveToShoppingCart(int shoppingCartItemId)
         {
             var dto = new MoveWishlistItemToShoppingCartDto(HttpContext.GetShoppingCartCorrelationId(), shoppingCartItemId);
 
@@ -38,7 +39,7 @@ namespace Bookstore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> MoveAllItemsToShoppingCart()
+        public async Task<ActionResult> MoveAllItemsToShoppingCart()
         {
             var dto = new MoveAllWishlistItemsToShoppingCartDto(HttpContext.GetShoppingCartCorrelationId());
 
@@ -50,7 +51,7 @@ namespace Bookstore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int shoppingCartItemId)
+        public async Task<ActionResult> Delete(int shoppingCartItemId)
         {
             var dto = new DeleteShoppingCartItemDto(HttpContext.GetShoppingCartCorrelationId(), shoppingCartItemId);
 
@@ -61,7 +62,7 @@ namespace Bookstore.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Error()
+        public ActionResult Error()
         {
             return View();
         }
