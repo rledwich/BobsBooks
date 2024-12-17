@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bookstore.Cdk")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23d5681770e97c4887b6470e5c5c259046193a8a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78f0def49c8ef47cff88dc18bf3aae21ffa3d7a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bookstore.Cdk")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bookstore.Cdk")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
