@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Bookstore.Web.Areas.Admin.Models.Inventory;
 using Bookstore.Domain.Books;
 using Bookstore.Domain.ReferenceData;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -54,10 +55,10 @@ namespace Bookstore.Web.Areas.Admin.Controllers
                 model.SelectedPublisherId, 
                 model.Year, 
                 model.ISBN, 
-                model.Summary, 
-                model.Price, 
-                model.Quantity, 
-                model.CoverImage?.InputStream, 
+                model.Summary,
+                model.Price,
+                model.Quantity,
+                model.CoverImage?.OpenReadStream(),
                 model.CoverImage?.FileName);
 
             var result = await bookService.AddAsync(dto);
@@ -91,7 +92,7 @@ namespace Bookstore.Web.Areas.Admin.Controllers
                 model.Summary,
                 model.Price,
                 model.Quantity,
-                model.CoverImage?.InputStream,
+                model.CoverImage?.OpenReadStream(),
                 model.CoverImage?.FileName);
 
             var result = await bookService.UpdateAsync(dto);
