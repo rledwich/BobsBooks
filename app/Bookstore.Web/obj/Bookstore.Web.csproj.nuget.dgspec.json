@@ -1,0 +1,445 @@
+{
+  "format": 1,
+  "restore": {
+    "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Web/Bookstore.Web.csproj": {}
+  },
+  "projects": {
+    "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Common/Bookstore.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Common/Bookstore.Common.csproj",
+        "projectName": "Bookstore.Common",
+        "projectPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Common/Bookstore.Common.csproj",
+        "packagesPath": "/tmp/tempfspartition/QnetTransformArtifacts/packages",
+        "outputPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Common/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/root/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/root/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Data/Bookstore.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Data/Bookstore.Data.csproj",
+        "projectName": "Bookstore.Data",
+        "projectPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Data/Bookstore.Data.csproj",
+        "packagesPath": "/tmp/tempfspartition/QnetTransformArtifacts/packages",
+        "outputPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Data/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/root/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Domain/Bookstore.Domain.csproj": {
+                "projectPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Domain/Bookstore.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.7.400.21, )"
+            },
+            "AWSSDK.Rekognition": {
+              "target": "Package",
+              "version": "[3.7.400.48, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.7.405.6, )"
+            },
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.5.1, )"
+            },
+            "Magick.NET-Q8-AnyCPU": {
+              "target": "Package",
+              "version": "[13.3.0, )"
+            },
+            "Magick.NET.Core": {
+              "target": "Package",
+              "version": "[14.0.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[*, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/root/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Domain/Bookstore.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Domain/Bookstore.Domain.csproj",
+        "projectName": "Bookstore.Domain",
+        "projectPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Domain/Bookstore.Domain.csproj",
+        "packagesPath": "/tmp/tempfspartition/QnetTransformArtifacts/packages",
+        "outputPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/root/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/root/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Web/Bookstore.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Web/Bookstore.Web.csproj",
+        "projectName": "Bookstore.Web",
+        "projectPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Web/Bookstore.Web.csproj",
+        "packagesPath": "/tmp/tempfspartition/QnetTransformArtifacts/packages",
+        "outputPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/root/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Common/Bookstore.Common.csproj": {
+                "projectPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Common/Bookstore.Common.csproj"
+              },
+              "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Data/Bookstore.Data.csproj": {
+                "projectPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Data/Bookstore.Data.csproj"
+              },
+              "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Domain/Bookstore.Domain.csproj": {
+                "projectPath": "/tmp/tempfspartition/QnetTransformArtifacts/MidTransformCode/sourceCode/app/Bookstore.Domain/Bookstore.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AWS.Logger.Core": {
+              "target": "Package",
+              "version": "[3.3.3, )"
+            },
+            "AWS.Logger.NLog": {
+              "target": "Package",
+              "version": "[3.3.4, )"
+            },
+            "AWSSDK.CloudWatchLogs": {
+              "target": "Package",
+              "version": "[3.7.405.1, )"
+            },
+            "AWSSDK.Core": {
+              "target": "Package",
+              "version": "[3.7.400.21, )"
+            },
+            "AWSSDK.Rekognition": {
+              "target": "Package",
+              "version": "[3.7.400.48, )"
+            },
+            "AWSSDK.S3": {
+              "target": "Package",
+              "version": "[3.7.405.6, )"
+            },
+            "AWSSDK.SimpleSystemsManagement": {
+              "target": "Package",
+              "version": "[3.7.402.21, )"
+            },
+            "Autofac": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "Autofac.Owin": {
+              "target": "Package",
+              "version": "[*, )"
+            },
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.5.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.OpenIdConnect": {
+              "target": "Package",
+              "version": "[6.0.11, )"
+            },
+            "Microsoft.AspNetCore.Owin": {
+              "target": "Package",
+              "version": "[6.0.29, )"
+            },
+            "Microsoft.AspNetCore.SystemWebAdapters": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Microsoft.Bcl.AsyncInterfaces": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.IdentityModel.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.IdentityModel.JsonWebTokens": {
+              "target": "Package",
+              "version": "[8.1.2, )"
+            },
+            "Microsoft.IdentityModel.Logging": {
+              "target": "Package",
+              "version": "[8.2.0, )"
+            },
+            "Microsoft.IdentityModel.Protocols": {
+              "target": "Package",
+              "version": "[8.1.2, )"
+            },
+            "Microsoft.IdentityModel.Protocols.OpenIdConnect": {
+              "target": "Package",
+              "version": "[8.1.2, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "Microsoft.Owin.Security.OpenIdConnect": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.19.5, )"
+            },
+            "Microsoft.jQuery.Unobtrusive.Validation": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "Modernizr": {
+              "target": "Package",
+              "version": "[2.8.3, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[5.3.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Buffers": {
+              "target": "Package",
+              "version": "[4.5.1, )"
+            },
+            "System.Diagnostics.DiagnosticSource": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
+            "System.Memory": {
+              "target": "Package",
+              "version": "[4.5.5, )"
+            },
+            "System.Numerics.Vectors": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "System.Runtime.CompilerServices.Unsafe": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "System.Text.Encoding": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Text.Encodings.Web": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "System.Threading.Tasks.Extensions": {
+              "target": "Package",
+              "version": "[4.5.4, )"
+            },
+            "System.ValueTuple": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
+            "jQuery": {
+              "target": "Package",
+              "version": "[3.7.0, )"
+            },
+            "jQuery.Validation": {
+              "target": "Package",
+              "version": "[1.19.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/root/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
